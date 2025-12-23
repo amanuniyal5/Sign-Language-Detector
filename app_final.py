@@ -8,7 +8,6 @@ import cv2
 import numpy as np
 import pickle
 import time
-import os
 from datetime import datetime
 from collections import deque
 from mediapipe import Image as MPImage, ImageFormat
@@ -34,105 +33,6 @@ try:
     MOUSE_CONTROL_AVAILABLE = True
 except:
     MOUSE_CONTROL_AVAILABLE = False
-
-# ============================================================
-# CLOUD DEPLOYMENT DETECTION
-# ============================================================
-
-def is_streamlit_cloud():
-    """Detect if running on Streamlit Cloud"""
-    try:
-        # Check common cloud environment indicators
-        hostname = os.path.expanduser("~")
-        if "adminuser" in hostname or "appuser" in hostname:
-            return True
-        # Check for Streamlit Cloud environment variables
-        if os.getenv("STREAMLIT_SHARING_MODE"):
-            return True
-        return False
-    except:
-        return False
-
-# Check if running on cloud and show warning
-if is_streamlit_cloud():
-    st.set_page_config(
-        page_title="Sign Language Detector Pro",
-        page_icon="🤟",
-        layout="wide"
-    )
-    
-    st.title("🤟 ASL SIGN LANGUAGE DETECTOR")
-    st.subheader("Real-Time Detection with 98.97% Accuracy")
-    
-    st.error("""
-    ### ⚠️ Real-Time Camera Not Available in Cloud Mode
-    
-    This app requires **continuous webcam access** for real-time ASL detection, 
-    which is only supported when running **locally on your computer**.
-    
-    **Streamlit Cloud limitations:**
-    - Cannot access user's local webcam for live video streaming
-    - Browser security prevents server-side camera access
-    - Real-time processing requires local hardware
-    """)
-    
-    st.success("""
-    ### ✅ Run Locally for Full Features
-    
-    **Installation (takes 2 minutes):**
-    ```bash
-    # Clone repository
-    git clone https://github.com/computervisioneng/sign-language-detector-python.git
-    cd sign-language-detector-python
-    
-    # Install dependencies
-    pip install -r requirements.txt
-    
-    # Set API key (for translation)
-    export GEMINI_API_KEY="your-api-key-here"
-    
-    # Run app
-    streamlit run app_final.py
-    ```
-    
-    **Full Features When Running Locally:**
-    - ✅ **Real-time ASL letter detection** (A-Z, 30 FPS)
-    - ✅ **98.97% classification accuracy**
-    - ✅ **AI translation** to 40+ languages (Google Gemini)
-    - ✅ **Mouse control** with hand gestures
-    - ✅ **Text-to-speech** output
-    - ✅ **Sentence builder** with auto-spacing
-    """)
-    
-    st.info("""
-    ### 📖 Project Information
-    
-    **Technologies:**
-    - Python, Streamlit, OpenCV, MediaPipe
-    - Random Forest ML model (2,600 training images)
-    - Google Gemini API for translation
-    
-    **Performance Metrics:**
-    - 98.97% accuracy on test data
-    - 30 FPS real-time processing
-    - <5ms prediction latency
-    - 21 hand landmarks detection
-    
-    **Links:**
-    - 📂 [GitHub Repository](https://github.com/computervisioneng/sign-language-detector-python)
-    - 📖 [Full Documentation](https://github.com/computervisioneng/sign-language-detector-python/blob/master/README.md)
-    - 🚀 [Deployment Guide](https://github.com/computervisioneng/sign-language-detector-python/blob/master/DEPLOYMENT.md)
-    """)
-    
-    # Show demo image if available
-    st.markdown("---")
-    st.subheader("📸 Preview")
-    st.write("Screenshot of the app running locally:")
-    
-    # Add a placeholder for demo image
-    st.info("💡 **Tip:** Star the repository on GitHub if you find it useful!")
-    
-    st.stop()  # Stop execution here for cloud deployment
 
 # Page config
 st.set_page_config(

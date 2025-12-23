@@ -199,28 +199,5 @@ export GEMINI_API_KEY="your-api-key-here"
 | Translation not working | Check Gemini API key and quota limits |
 | Mouse control lagging | Reduce smoothing value, check CPU usage |
 
-## 🚀 Deployment
-
-### Deploy to Streamlit Cloud
-
-1. **Push to GitHub**:
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin master
-   ```
-
-2. **Deploy on Streamlit Cloud**:
-   - Go to [share.streamlit.io](https://share.streamlit.io)
-   - Connect your GitHub repository
-   - Set main file: `app_final.py`
-   - Add secrets in dashboard:
-     ```toml
-     GEMINI_API_KEY = "your-api-key-here"
-     ```
-
-3. **Deploy!** Your app will be live in minutes.
-
-📖 **Full deployment guide**: See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
 
 **⚠️ Note**: Mouse control features only work locally (requires system access). Detection mode works perfectly on cloud deployment.
